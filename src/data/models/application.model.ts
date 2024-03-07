@@ -1,6 +1,8 @@
 /* depending on frequency of application question changes, would
 consider trade-offs between hard-coding and developing a dynamic
 form */
+import {Resume} from "./resume.model";
+
 export interface Application {
 	applicationId: number;
 	applicantId: number;
@@ -8,7 +10,8 @@ export interface Application {
 
 	remoteLocation: string;
 
-	resume: string;
+	resume: Resume;
+	resumeUrl: string;
 
 	currentLocation: string | null;
 	currentCompany: string | null;
