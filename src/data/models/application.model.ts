@@ -3,9 +3,13 @@ consider trade-offs between hard-coding and developing a dynamic
 form */
 import {Resume} from "./resume.model";
 import {Applicant} from "./applicant.model";
+import {ApplicationStatus} from "../enums/applicationStatus";
+import {DateTime} from "luxon";
 
 export interface Application {
 	applicationId: number;
+	applicationStatus: ApplicationStatus;
+	applicationDate: DateTime;
 
 	applicantId: number;
 	applicant: Applicant;

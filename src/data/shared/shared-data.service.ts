@@ -3,6 +3,7 @@ import {Applicant} from "../models/applicant.model";
 import {Application} from "../models/application.model";
 import {Role} from "../models/role.model";
 import {DateTime} from "luxon";
+import {ApplicationStatus} from "../enums/applicationStatus";
 
 @Injectable({
 	providedIn: 'root'
@@ -23,6 +24,8 @@ export class SharedDataService {
 	applications: Application[] = [
 		{
 			applicationId: 1,
+			applicationStatus: ApplicationStatus.WAITING_FOR_REVIEW,
+			applicationDate: DateTime.fromISO('2024-03-07'),
 			applicantId: 1,
 			applicant: this.applicants[0],
 			roleId: 1,
