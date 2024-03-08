@@ -1,0 +1,18 @@
+<p-toolbar styleClass="mb-4">
+	<div class="p-toolbar-group-start">
+		<ng-container *ngIf="selectedApplications.length > 1">
+			<button pButton icon="pi pi-calendar-plus" class="me-2" label="Schedule interviews"></button>
+			<p-button severity="warning" icon="pi pi-times" class="me-2" label="Reject applicants"></p-button>
+		</ng-container>
+		<ng-container *ngIf="selectedApplications.length === 1">
+			<button pButton icon="pi pi-calendar-plus" class="me-2" label="Schedule interview"></button>
+			<p-button severity="warning" icon="pi pi-times" class="me-2" label="Reject applicant"></p-button>
+		</ng-container>
+		<ng-container *ngIf="selectedApplications.length === 0 && bulkUpdateOnly">
+			Select one or more applications to enable bulk updates.
+		</ng-container>
+		<ng-container *ngIf="selectedApplications.length === 0 && !bulkUpdateOnly">
+			There's a configuration problem -- there must be a selected application when not in bulkUpdateOnly mode.
+		</ng-container>
+	</div>
+</p-toolbar>
