@@ -16,6 +16,7 @@ export class SharedDataService {
 			phone: "Please see my application",
 			firstName: "William",
 			lastName: "Welch",
+			fullName: "William Welch",
 			pronouns: "he/him",
 			applications: []
 		}
