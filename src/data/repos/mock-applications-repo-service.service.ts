@@ -15,6 +15,10 @@ export class MockApplicationsRepoServiceService extends ApplicationsRepoService 
 		return of(this.sharedData.applications);
 	}
 
+	override getApplicationsForRole(roleId: number): Observable<Application[]> {
+		return of(this.sharedData.applications.filter(a => a.roleId === roleId));
+	}
+
 	override getApplication(applicationId: number): Observable<Application | undefined> {
 		return of(this.sharedData.applications.find(a => a.applicationId === applicationId));
 	}
