@@ -14,6 +14,9 @@ import {ApplicationStatusTagComponent} from './application-status-tag/applicatio
 import {TagModule} from "primeng/tag";
 import {TabViewModule} from "primeng/tabview";
 import {SharedModule} from "../shared/shared.module";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {CalendarModule} from "primeng/calendar";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import {SharedModule} from "../shared/shared.module";
 		AccordionModule,
 		TagModule,
 		TabViewModule,
-		SharedModule
+		SharedModule,
+		OverlayPanelModule,
+		CalendarModule,
+		FormsModule
 	],
 	providers: [
 		{provide: ApplicationsRepoService, useClass: MockApplicationsRepoService},
