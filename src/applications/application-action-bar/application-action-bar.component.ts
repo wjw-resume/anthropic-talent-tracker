@@ -9,4 +9,7 @@ import {Application} from "../../data/models/application.model";
 export class ApplicationActionBarComponent {
 	@Input({required: true}) selectedApplications: Application[] = [];
 	@Input() bulkUpdateOnly: boolean = false;
+	@Input() alignment: Alignment = "left";
 }
+
+export type Alignment = "left" | "middle" | "right";
