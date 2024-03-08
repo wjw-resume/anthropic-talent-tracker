@@ -60,7 +60,7 @@
 				</td>
 				<td>{{application.applicant.fullName}}</td>
 				<td>{{application.applicationDate | date}}</td>
-				<td><p-tag [severity]="getSeverity(application.applicationStatus)">Waiting for review</p-tag></td>
+				<td><app-application-status-tag [status]="application.applicationStatus"></app-application-status-tag></td>
 				<td>
 					<a routerLink="/applications/{{application.applicationId}}" class="p-button" size="small">Review</a>
 				</td>
