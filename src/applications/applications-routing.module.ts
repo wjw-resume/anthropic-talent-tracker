@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {ViewApplicationComponent} from "./view-application/view-application.component";
 
 const routes: Routes = [
-	// {
-	// 	path: ":id",
-	// 	component: ViewRoleComponent
-	// },
-	// {
-	// 	path: "",
-	// 	pathMatch: "full",
-	// 	component: RolesDashboardComponent
-	// }
+	{
+		path: ":id",
+		component: ViewApplicationComponent
+	},
 ];
 
 @NgModule({
