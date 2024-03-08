@@ -8,6 +8,10 @@ const routes: Routes = [
 		loadChildren: () => import('./../roles/roles.module').then(m => m.RolesModule)
 	},
 	{
+		path: "applications",
+		loadChildren: () => import("./../applications/applications.module").then(m => m.ApplicationsModule)
+	},
+	{
 		path: "",
 		pathMatch: "full",
 		redirectTo: "/roles"
