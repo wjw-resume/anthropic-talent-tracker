@@ -8,10 +8,23 @@ import {DateTime} from "luxon";
 	providedIn: 'root'
 })
 export class SharedDataService {
+	applicants: Applicant[] = [
+		{
+			applicantId: 1,
+			email: "Please see my application",
+			phone: "Please see my application",
+			firstName: "William",
+			lastName: "Welch",
+			pronouns: "he/him",
+			applications: []
+		}
+	];
+
 	applications: Application[] = [
 		{
 			applicationId: 1,
 			applicantId: 1,
+			applicant: this.applicants[0],
 			roleId: 1,
 			remoteLocation: "San Francisco, CA",
 			additionalInfo: null,
@@ -97,18 +110,6 @@ export class SharedDataService {
 		}
 	];
 
-	applicants: Applicant[] = [
-		{
-			applicantId: 1,
-			email: "Please see my application",
-			phone: "Please see my application",
-			firstName: "William",
-			lastName: "Welch",
-			pronouns: "he/him",
-			applications: [this.applications[0]]
-		}
-	];
-
 	roles: Role[] = [
 		new Role({
 			roleId: 1,
@@ -120,5 +121,6 @@ export class SharedDataService {
 	];
 
 	constructor() {
+		this.applicants[0].applications.push(this.applications[0]);
 	}
 }

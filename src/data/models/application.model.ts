@@ -2,10 +2,14 @@
 consider trade-offs between hard-coding and developing a dynamic
 form */
 import {Resume} from "./resume.model";
+import {Applicant} from "./applicant.model";
 
 export interface Application {
 	applicationId: number;
+
 	applicantId: number;
+	applicant: Applicant;
+
 	roleId: number;
 
 	remoteLocation: string;
