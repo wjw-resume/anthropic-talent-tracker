@@ -1,0 +1,24 @@
+:host {
+	cursor: pointer;
+}
+
+.role-box {
+	border: 1px lightgrey solid;
+	border-radius: 3px;
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.view-btn {
+	display: none;
+}
+
+.role-box:hover .view-btn {
+	display: initial !important;
+}
+
+.listing-text {
+	text-align: left;
+}

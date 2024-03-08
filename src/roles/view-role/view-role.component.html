@@ -1,0 +1,13 @@
+<div class="mt-4">
+	<div class="d-flex mb-5" style="gap: 2rem;">
+		<a routerLink="/roles" class="btn btn-dark ">Back</a>
+	</div>
+
+	<div class="mb-4">
+		<h3>{{role.roleName}}</h3>
+		<small>Role Number: #{{role.roleId}} &mdash; Open: {{role.openDate.toJSDate() |date}} &mdash; Closed: {{role.closeDate.toJSDate() |date}}</small>
+	</div>
+
+	<app-role-applications [applications]="applications"></app-role-applications>
+</div>
+

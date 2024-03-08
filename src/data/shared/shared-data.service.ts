@@ -3,15 +3,32 @@ import {Applicant} from "../models/applicant.model";
 import {Application} from "../models/application.model";
 import {Role} from "../models/role.model";
 import {DateTime} from "luxon";
+import {ApplicationStatus} from "../enums/applicationStatus";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class SharedDataService {
+	applicants: Applicant[] = [
+		{
+			applicantId: 1,
+			email: "Please see my application",
+			phone: "Please see my application",
+			firstName: "William",
+			lastName: "Welch",
+			fullName: "William Welch",
+			pronouns: "he/him",
+			applications: []
+		}
+	];
+
 	applications: Application[] = [
 		{
 			applicationId: 1,
+			applicationStatus: ApplicationStatus.WAITING_FOR_REVIEW,
+			applicationDate: DateTime.fromISO('2024-03-07').toJSDate(),
 			applicantId: 1,
+			applicant: this.applicants[0],
 			roleId: 1,
 			remoteLocation: "San Francisco, CA",
 			additionalInfo: null,
@@ -97,18 +114,6 @@ export class SharedDataService {
 		}
 	];
 
-	applicants: Applicant[] = [
-		{
-			applicantId: 1,
-			email: "Please see my application",
-			phone: "Please see my application",
-			firstName: "William",
-			lastName: "Welch",
-			pronouns: "he/him",
-			applications: [this.applications[0]]
-		}
-	];
-
 	roles: Role[] = [
 		new Role({
 			roleId: 1,
@@ -120,5 +125,6 @@ export class SharedDataService {
 	];
 
 	constructor() {
+		this.applicants[0].applications.push(this.applications[0]);
 	}
 }

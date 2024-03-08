@@ -3,8 +3,11 @@ import {Application} from "./application.model";
 
 export interface Applicant {
 	applicantId: number;
+
 	firstName: string;
 	lastName: string;
+	fullName: string;
+
 	pronouns: string;
 
 	email: string;

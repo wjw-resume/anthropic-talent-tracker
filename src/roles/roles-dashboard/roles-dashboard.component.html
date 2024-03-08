@@ -1,0 +1,58 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="mt-4 nav nav-tabs">
+	<li [ngbNavItem]="1">
+		<button ngbNavLink [ngClass]="{'bg-dark text-light': active === 1}">Open</button>
+		<ng-template ngbNavContent>
+			<div class="mt-4">
+				<div *ngIf="roles.length > 0">
+					<div class="small mb-4">Click on any role to open it.</div>
+					<app-role-listing
+						*ngFor="let role of openRoles"
+						[role]="role"
+					></app-role-listing>
+				</div>
+
+				<div *ngIf="roles.length === 0">
+					There are no open roles.
+				</div>
+			</div>
+		</ng-template>
+	</li>
+	<li [ngbNavItem]="2">
+		<button ngbNavLink [ngClass]="{'bg-dark text-light': active === 2}">Closed</button>
+		<ng-template ngbNavContent>
+			<div class="mt-4">
+				<div *ngIf="closedRoles.length > 0">
+					<div class="small mb-4">Click on any role to open it.</div>
+					<app-role-listing
+						*ngFor="let role of closedRoles"
+						[role]="role"
+					></app-role-listing>
+				</div>
+				<div *ngIf="closedRoles.length === 0">
+					There are no closed roles.
+				</div>
+			</div>
+		</ng-template>
+	</li>
+	<li [ngbNavItem]="3">
+		<button ngbNavLink [ngClass]="{'bg-dark text-light': active === 3}">All</button>
+		<ng-template ngbNavContent>
+			<div class="mt-4">
+				<div *ngIf="roles.length > 0">
+					<div class="small mb-4">Click on any role to open it.</div>
+					<app-role-listing
+						*ngFor="let role of roles"
+						[role]="role"
+						[showStatus]="true"
+					></app-role-listing>
+				</div>
+
+				<div *ngIf="roles.length === 0">
+					There are no roles.
+				</div>
+			</div>
+		</ng-template>
+	</li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
