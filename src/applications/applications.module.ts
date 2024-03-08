@@ -10,15 +10,17 @@ import {ToolbarModule} from "primeng/toolbar";
 import {AccordionModule} from "primeng/accordion";
 import {RolesRepoService} from "../data/repos/RolesRepoService";
 import {MockRolesRepoService} from "../data/repos/mock-roles-repo.service";
-import { ApplicationStatusTagComponent } from './application-status-tag/application-status-tag.component';
+import {ApplicationStatusTagComponent} from './application-status-tag/application-status-tag.component';
 import {TagModule} from "primeng/tag";
+import {TabViewModule} from "primeng/tabview";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
 	declarations: [
 		ViewApplicationComponent,
 		ApplicationActionBarComponent,
-  ApplicationStatusTagComponent
+		ApplicationStatusTagComponent
 	],
 	imports: [
 		CommonModule,
@@ -26,7 +28,9 @@ import {TagModule} from "primeng/tag";
 		ButtonModule,
 		ToolbarModule,
 		AccordionModule,
-		TagModule
+		TagModule,
+		TabViewModule,
+		SharedModule
 	],
 	providers: [
 		{provide: ApplicationsRepoService, useClass: MockApplicationsRepoService},
