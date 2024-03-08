@@ -17,6 +17,7 @@ export class ApplicationActionBarComponent implements OnInit {
 	@Input() alignment: Alignment = "left";
 
 	@ViewChild('scheduleInterview', {static: true}) scheduleInterviewOverlay!: OverlayPanel;
+	@ViewChild('rejectApplicant', {static: true}) rejectApplicantOverlay!: OverlayPanel;
 
 	interviewTimes: { [k: string]: string } = {};
 
@@ -37,13 +38,14 @@ export class ApplicationActionBarComponent implements OnInit {
 		);
 	}
 
-	updateStatus(application: Application): void {
-		application.applicationStatus = ApplicationStatus.INTERVIEW_SCHEDULED;
+	handleScheduleClick(): void {
+		this.selectedApplications[0].applicationStatus = ApplicationStatus.INTERVIEW_SCHEDULED;
+		this.scheduleInterviewOverlay.hide();
 	}
 
-	handleScheduleClick(): void {
-		this.updateStatus(this.selectedApplications[0]);
-		this.scheduleInterviewOverlay.hide();
+	handleRejectClick(): void {
+		this.selectedApplications[0].applicationStatus = ApplicationStatus.REJECTED;
+		this.rejectApplicantOverlay.hide();
 	}
 }
 
