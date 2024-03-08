@@ -1,0 +1,70 @@
+<div>
+	<p-toolbar styleClass="mb-4">
+		<div class="p-toolbar-group-start">
+			<ng-container *ngIf="selectedApplications.length > 0">
+				<button pButton icon="pi pi-calendar-plus" class="me-2" label="Schedule interview"></button>
+				<p-button severity="warning" icon="pi pi-times" class="me-2" label="Reject applicant"></p-button>
+			</ng-container>
+			<ng-container *ngIf="selectedApplications.length === 0">
+				Select one or more applications to enable bulk updates.
+			</ng-container>
+		</div>
+	</p-toolbar>
+	<h6>Submitted Applications</h6>
+	<p-table [value]="applications" [(selection)]="selectedApplications" [selectionMode]="'multiple'">
+		<ng-template pTemplate="header">
+			<tr>
+				<th style="width: 4rem">
+					<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+				</th>
+				<th>
+					<div>
+						Name
+						<p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+					</div>
+				</th>
+				<th>
+					<div>
+						Date Received
+						<p-columnFilter type="date" field="name" display="menu"></p-columnFilter>
+					</div>
+				</th>
+				<th>
+					<div class="d-flex align-items-center">
+						Application Status
+						<p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+							<!--<ng-template pTemplate="header">
+								<div class="px-3 pt-3 pb-0">
+									<span class="fw-bold">Agent Picker</span>
+								</div>
+							</ng-template>-->
+							<ng-template pTemplate="filter" let-value let-filter="filterCallback">
+								<p-multiSelect [filter]="false" [ngModel]="value" [options]="['Open','Closed']" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+									<ng-template let-option pTemplate="item">
+										<div class="d-inline-block vertical-align-middle">
+											<span class="ml-1 mt-1">{{ option }}</span>
+										</div>
+									</ng-template>
+								</p-multiSelect>
+							</ng-template>
+						</p-columnFilter>
+					</div>
+				</th>
+				<th></th>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="body" let-application>
+			<tr>
+				<td>
+					<p-tableCheckbox [value]="application"></p-tableCheckbox>
+				</td>
+				<td>{{application.applicant.firstName}} {{application.applicant.lastName}}</td>
+				<td>{{DateTime.fromISO('2024-03-07').toJSDate() | date}}</td>
+				<td><p-tag [severity]="getSeverity('Waiting for review')">Waiting for review</p-tag></td>
+				<td>
+					<a routerLink="applications/{{application.applicationId}}" class="p-button" size="small">Review</a>
+				</td>
+			</tr>
+		</ng-template>
+	</p-table>
+</div>
