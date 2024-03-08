@@ -9,7 +9,7 @@ import {DateTime} from "luxon";
 export interface Application {
 	applicationId: number;
 	applicationStatus: ApplicationStatus;
-	applicationDate: DateTime;
+	applicationDate: Date;
 
 	applicantId: number;
 	applicant: Applicant;

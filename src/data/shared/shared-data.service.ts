@@ -26,7 +26,7 @@ export class SharedDataService {
 		{
 			applicationId: 1,
 			applicationStatus: ApplicationStatus.WAITING_FOR_REVIEW,
-			applicationDate: DateTime.fromISO('2024-03-07'),
+			applicationDate: DateTime.fromISO('2024-03-07').toJSDate(),
 			applicantId: 1,
 			applicant: this.applicants[0],
 			roleId: 1,

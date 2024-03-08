@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {DateTime} from "luxon";
 import {Application} from "../../../data/models/application.model";
+import {ApplicationStatus} from "../../../data/enums/applicationStatus";
 
 @Component({
   selector: 'app-role-applications',
@@ -12,15 +13,18 @@ export class RoleApplicationsComponent {
 
 	selectedApplications: Application[] = [];
 
+	applicationStatuses = Object.values(ApplicationStatus);
+	filteredStatuses: string[] = [];
+
     protected readonly DateTime = DateTime;
 
 	getSeverity(status: string): string {
 		switch (status) {
-			case 'Waiting for review':
+			case ApplicationStatus.WAITING_FOR_REVIEW:
 				return 'primary';
-			case 'Interview scheduled':
+			case ApplicationStatus.INTERVIEW_SCHEDULED:
 				return 'success';
-			case 'Rejected':
+			case ApplicationStatus.REJECTED:
 				return 'danger';
 			default:
 				throw new Error('Unsupported applicant status');
