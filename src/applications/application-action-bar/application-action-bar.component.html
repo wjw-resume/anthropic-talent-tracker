@@ -16,16 +16,19 @@
 </ng-template>
 <p-toolbar styleClass="mb-4">
 	<div class="p-toolbar-group-start">
+		<ng-content select="[left]"></ng-content>
 		<ng-container *ngIf="alignment === 'left'">
 			<ng-container *ngTemplateOutlet="actions"></ng-container>
 		</ng-container>
 	</div>
 	<div class="p-toolbar-group-center">
+		<ng-content select="[middle]"></ng-content>
 		<ng-container *ngIf="alignment === 'middle'">
 			<ng-container *ngTemplateOutlet="actions"></ng-container>
 		</ng-container>
 	</div>
 	<div class="p-toolbar-group-end">
+		<ng-content select="[right]"></ng-content>
 		<ng-container *ngIf="alignment === 'right'">
 			<ng-container *ngTemplateOutlet="actions"></ng-container>
 		</ng-container>
