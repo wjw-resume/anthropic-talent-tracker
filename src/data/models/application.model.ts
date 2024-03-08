@@ -4,7 +4,6 @@ form */
 import {Resume} from "./resume.model";
 import {Applicant} from "./applicant.model";
 import {ApplicationStatus} from "../enums/applicationStatus";
-import {DateTime} from "luxon";
 
 export interface Application {
 	applicationId: number;
@@ -16,7 +15,7 @@ export interface Application {
 
 	roleId: number;
 
-	remoteLocation: string;
+	inPersonLocation: string;
 
 	resume: Resume;
 	resumeUrl: string;
