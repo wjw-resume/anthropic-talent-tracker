@@ -18,6 +18,7 @@ import {ToolbarModule} from "primeng/toolbar";
 import {ButtonModule} from "primeng/button";
 import { RoleApplicationsComponent } from './view-role/role-applications/role-applications.component';
 import {TagModule} from "primeng/tag";
+import {ApplicationsModule} from "../applications/applications.module";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {TagModule} from "primeng/tag";
 		FormsModule,
 		ToolbarModule,
 		ButtonModule,
-		TagModule
+		TagModule,
+		ApplicationsModule
 	],
 	providers: [
 		{provide: RolesRepoService, useClass: MockRolesRepoService},
