@@ -1,0 +1,65 @@
+<p-overlayPanel #scheduleInterview >
+	<div style="line-height: var(--bs-body-line-height)">
+		When would you like to arrange an interview with the below candidate{{selectedApplications.length > 1 ? 's' : ''}}?
+		<div class="row align-items-center mt-3" *ngFor="let app of selectedApplications">
+			<div class="col-4" >{{app.applicant.fullName}}</div>
+			<div class="col-8"><p-calendar [(ngModel)]="interviewTimes[app.applicant.fullName]" [showTime]="true" hourFormat="12" placeholder="mm/dd/yyyy hh:mm ampm"></p-calendar></div>
+		</div>
+		<div class="w-100 text-center mt-4" *ngIf="selectedApplications.length > 0 && Object.keys(interviewTimes).length === selectedApplications.length">
+			<a class="p-button p-button-success"
+			   href="mailto:?subject=Next steps in the Anthropic hiring process&body=Dear {{selectedApplications[0].applicant.firstName}},%0A%0AThanks for your interest in Anthropic. We'd like to schedule a preliminary interview with you to discuss the {{getRole() |async}} role you applied to. Would you be free for a discussion on {{Object.values(interviewTimes)[0] |date}} at {{Object.values(interviewTimes)[0] |date: 'h:mm a'}}?"
+			   (click)="handleScheduleClick()"
+			>
+				Schedule
+			</a>
+		</div>
+	</div>
+</p-overlayPanel>
+<p-overlayPanel #rejectApplicant >
+	<div style="line-height: var(--bs-body-line-height)">
+		<div class="w-100 text-center mt-4" *ngIf="selectedApplications.length > 0">
+			<a class="p-button p-button-danger"
+			   href="mailto:?subject=Thanks for your interest in Anthropic&body=Dear {{selectedApplications[0].applicant.firstName}},%0A%0AThanks for your interest in Anthropic. We've decided to proceed with other candidates for the {{getRole() |async}} role you applied to. Please continue to check our careers site as new opportunities arise frequently."
+			   (click)="handleRejectClick()"
+			>
+				Email rejection
+			</a>
+		</div>
+	</div>
+</p-overlayPanel>
+<ng-template #actions>
+	<ng-container *ngIf="selectedApplications.length > 1">
+		<button pButton (click)="scheduleInterview.toggle($event)" icon="pi pi-calendar-plus" class="me-2" label="Schedule interviews"></button>
+		<p-button (click)="rejectApplicant.toggle($event)" severity="warning" icon="pi pi-times" class="me-2" label="Reject applicants"></p-button>
+	</ng-container>
+	<ng-container *ngIf="selectedApplications.length === 1">
+		<button pButton (click)="scheduleInterview.toggle($event)" icon="pi pi-calendar-plus" class="me-2" label="Schedule interview"></button>
+		<p-button (click)="rejectApplicant.toggle($event)" severity="warning" icon="pi pi-times" class="me-2" label="Reject applicant"></p-button>
+	</ng-container>
+	<ng-container *ngIf="selectedApplications.length === 0 && bulkUpdateOnly">
+		Select one or more applications to enable bulk updates.
+	</ng-container>
+	<ng-container *ngIf="selectedApplications.length === 0 && !bulkUpdateOnly">
+		There's a configuration problem -- there must be a selected application when not in bulkUpdateOnly mode.
+	</ng-container>
+</ng-template>
+<p-toolbar styleClass="mb-4">
+	<div class="p-toolbar-group-start">
+		<ng-content select="[left]"></ng-content>
+		<ng-container *ngIf="alignment === 'left'">
+			<ng-container *ngTemplateOutlet="actions"></ng-container>
+		</ng-container>
+	</div>
+	<div class="p-toolbar-group-center">
+		<ng-content select="[middle]"></ng-content>
+		<ng-container *ngIf="alignment === 'middle'">
+			<ng-container *ngTemplateOutlet="actions"></ng-container>
+		</ng-container>
+	</div>
+	<div class="p-toolbar-group-end">
+		<ng-content select="[right]"></ng-content>
+		<ng-container *ngIf="alignment === 'right'">
+			<ng-container *ngTemplateOutlet="actions"></ng-container>
+		</ng-container>
+	</div>
+</p-toolbar>

@@ -1,0 +1,23 @@
+.applicant-links {
+	display: flex;
+	gap: 1rem;
+}
+
+.applicant-link + .applicant-link {
+	border-left: 1px solid lightgrey;
+	padding-left: 1rem;
+}
+
+.applicant-link {
+	text-decoration: none;
+}
+
+.skill + .skill {
+	border-left: 1px solid lightgrey;
+	padding-left: 1rem;
+	margin-left: 1rem;
+}
+
+.job + .job::before {
+	content: ', ';
+}

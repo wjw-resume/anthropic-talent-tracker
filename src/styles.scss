@@ -16,13 +16,42 @@
 
 // OTHER GLOBAL STYLES
 
+:root {
+	--anthropic-bg: #fafaf7;
+}
+
 body {
-	background-color: #fafaf7;
+	background-color: var(--anthropic-bg);
+	height: 100dvh;
+}
+
+.anthropic-bg {
+	background-color: var(--anthropic-bg);
 }
 
 @layer primeng {
 	.p-component {
 		line-height: 1.0;
+	}
+
+	.btn {
+		border-radius: var(--bs-border-radius);
+	}
+
+	.anthropic-bg .p-tabview-panels {
+		background-color: var(--anthropic-bg);
+	}
+
+	.anthropic-bg .p-tabview-nav {
+		background-color: var(--anthropic-bg);
+	}
+
+	.anthropic-bg .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+		background-color: var(--anthropic-bg);
+	}
+
+	.anthropic-bg a {
+		background-color: var(--anthropic-bg) !important;
 	}
 }
 

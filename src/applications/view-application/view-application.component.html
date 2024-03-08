@@ -1,0 +1,169 @@
+<div class="mt-4">
+	<div class="d-flex mb-2" style="gap: 2rem;">
+		<app-application-action-bar [selectedApplications]="[application]" alignment="right" style="width: 100%">
+			<button type="button" class="btn btn-dark" (click)="window.history.back()" left>Back to previous screen
+			</button>
+		</app-application-action-bar>
+	</div>
+	<p-accordion styleClass="mb-4">
+		<p-accordionTab header="Application for Role #{{role.roleId}}: {{role.roleName}}">
+			<ul>
+				<li>Role open date: {{ role.openDate.toJSDate() |date }}</li>
+				<li>Role close date: {{ role.closeDate.toJSDate() | date }}</li>
+			</ul>
+			<a routerLink="/roles/{{role.roleId}}" class="btn btn-outline-primary">View role</a>
+		</p-accordionTab>
+	</p-accordion>
+	<h3 class="mb-2">{{ application.applicant.fullName }} ({{ application.applicant.pronouns }})
+		<app-application-status-tag [status]="application.applicationStatus"></app-application-status-tag>
+	</h3>
+	<div class="applicant-links small">
+		<a [href]="application.linkedinUrl" target="_blank" class="applicant-link"
+		   *ngIf="application.linkedinUrl !== null">
+			<i class="pi pi-linkedin"></i> LinkedIn
+		</a>
+		<a [href]="application.githubUrl" target="_blank" class="applicant-link"
+		   *ngIf="application.githubUrl !== null">
+			<i class="pi pi-github"></i> Github
+		</a>
+		<a [href]="application.publicationsUrl" target="_blank" class="applicant-link"
+		   *ngIf="application.publicationsUrl !== null">
+			<i class="pi pi-book"></i> Publications
+		</a>
+		<a [href]="application.websiteUrl" target="_blank" class="applicant-link"
+		   *ngIf="application.websiteUrl !== null">
+			<i class="pi pi-globe"></i> Website
+		</a>
+	</div>
+	<div class="small" *ngIf="application.currentLocation !== null || application.currentCompany !== null">
+		Currently: {{ application.currentCompany === null ? '' : application.currentCompany + '; '}} {{ application.currentLocation }}
+	</div>
+	<p-tabView styleClass="anthropic-bg mt-3">
+		<p-tabPanel [headerStyleClass]="'anthropic-bg'" class="anthropic-bg" header="Application">
+			<h4>Work Authorization</h4>
+			<ul style="line-height: var(--bs-body-line-height)">
+				<li>
+					Are you legally authorized to work in the country in which the job you are applying for is located?
+					<b>{{ application.legallyAuthorized |boolYesNo }}</b>
+				</li>
+				<li>
+					Will you now or in the future require visa sponsorship for employment at Anthropic?
+					<b>{{ application.visaRequired |boolYesNo }}</b>
+				</li>
+			</ul>
+			<h4>Work Environment</h4>
+			<ul style="line-height: var(--bs-body-line-height)">
+				<li>
+					Are you open to working in-person at our office several days a week?
+					<b>{{ application.inPersonOkay |boolYesNo }}</b>
+				</li>
+				<li>
+					Preferred in-person location:
+					<b>{{ application.inPersonLocation }}</b>
+				</li>
+				<li>
+					Willing to relocate?
+					<b>
+						<ng-container *ngFor="let loc of application.relocationLocations">{{ loc }}</ng-container>
+					</b>
+				</li>
+			</ul>
+			<h4>Availability</h4>
+			<ul style="line-height: var(--bs-body-line-height)">
+				<li>
+					Earliest start:
+					<b>{{ application.earliestStart }}</b>
+				</li>
+				<li>
+					Deadlines/timeline considerations:
+					<b>{{ application.deadlines }}</b>
+				</li>
+			</ul>
+			<h4>Acknowledgments</h4>
+			<ul style="line-height: var(--bs-body-line-height)">
+				<li>
+					Policy on using AI to assist in your application - While we encourage people to use AI systems during their role to help them work faster and more effectively, please do not use AI assistants during the application process. We want to understand your personal interest in Anthropic without mediation through an AI system, and we also want to evaluate your non-AI-assisted communication skills. Please indicate ‘Yes’ if you have read and agree to this.
+					<b>{{ application.aiPolicyAcknowledged |boolYesNo }}</b>
+				</li>
+			</ul>
+		</p-tabPanel>
+		<p-tabPanel header="Resume (Summarized)">
+			<h4>Skills</h4>
+			<div>
+				<table style="width: 100%; border-spacing: 2rem; line-height: var(--bs-body-line-height)" >
+					<tr>
+						<td style="width: 15ch;">Languages</td>
+						<td>
+							{{application.resume.languageSkills.join(', ')}}
+						</td>
+					</tr>
+					<tr>
+						<td style="width: 15ch;">Technologies</td>
+						<td>
+							{{application.resume.techSkills.join(', ')}}
+						</td>
+					</tr>
+				</table>
+			</div>
+			<h4 class="mt-3">Work Experience</h4>
+			<p-accordion [multiple]="true">
+				<p-accordionTab *ngFor="let experience of application.resume.workExperiences">
+					<ng-template pTemplate="header">
+						<div class="row w-100">
+							<div class="col-7">{{ experience.experienceName }}</div>
+							<div class="col-5 text-end">
+								{{ experience.startDate.toJSDate() |date:'MMMM yyyy' }} &ndash;
+								<span [ngSwitch]="experience.endDate">
+									<ng-container *ngSwitchCase="null">Present</ng-container>
+									<ng-container
+										*ngSwitchDefault>{{ experience.endDate?.toJSDate() |date:'MMMM yyyy' }}</ng-container>
+								</span>
+							</div>
+						</div>
+					</ng-template>
+					<div>
+						<div>
+							<span class="job" *ngFor="let pos of experience.positions">
+								{{pos.positionTitle}} ({{pos.startDate?.toJSDate() |date:'YYYY'}} &ndash; {{pos.endDate === null ? 'Present' : pos.endDate.toJSDate() |date: 'YYYY'}})</span>
+						</div>
+						<div [innerHTML]="experience.text"></div>
+					</div>
+				</p-accordionTab>
+			</p-accordion>
+			<h4 class="mt-3">Education</h4>
+			<p-accordion [multiple]="true">
+				<p-accordionTab *ngFor="let experience of application.resume.educationExperiences"
+				>
+					<ng-template pTemplate="header">
+						<div class="row w-100">
+							<span class="col-8">{{ experience.experienceName }}
+								&mdash; {{ experience.positions[0].positionTitle }}</span>
+							<span class="col-4 text-end">
+								<ng-container *ngIf="experience.endDate === null">
+									Ongoing
+								</ng-container>
+								<ng-container *ngIf="experience.endDate !== null">
+									{{ experience.endDate.toJSDate() |date:'MMMM yyyy' }}
+								</ng-container>
+							</span>
+						</div>
+					</ng-template>
+					<div [innerHTML]="experience.text"></div>
+				</p-accordionTab>
+			</p-accordion>
+		</p-tabPanel>
+		<p-tabPanel header="Resume (PDF)">
+			<object [data]=
+						"sanitizer.bypassSecurityTrustResourceUrl(application.resumeUrl)"
+					style="width: 100%;"
+					height="500">
+			</object>
+		</p-tabPanel>
+		<p-tabPanel header="History">
+			<ul>
+				<li>Applied on: {{application.applicationDate |date}}</li>
+			</ul>
+		</p-tabPanel>
+	</p-tabView>
+
+</div>

@@ -7,7 +7,7 @@ import {SharedDataService} from "../shared/shared-data.service";
 @Injectable({
 	providedIn: 'root'
 })
-export class MockApplicationsRepoServiceService extends ApplicationsRepoService {
+export class MockApplicationsRepoService extends ApplicationsRepoService {
 	constructor(private sharedData: SharedDataService) {
 		super();
 	}

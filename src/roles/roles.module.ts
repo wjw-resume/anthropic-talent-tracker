@@ -7,7 +7,7 @@ import {RoleListingComponent} from './roles-dashboard/role-listing/role-listing.
 import {RolesRepoService} from "../data/repos/RolesRepoService";
 import {MockRolesRepoService} from "../data/repos/mock-roles-repo.service";
 import {ApplicationsRepoService} from "../data/repos/ApplicationsRepoService";
-import {MockApplicationsRepoServiceService} from "../data/repos/mock-applications-repo-service.service";
+import {MockApplicationsRepoService} from "../data/repos/mock-applications-repo.service";
 import {ApplicantRepoService} from "../data/repos/ApplicantRepoService";
 import {MockApplicantRepoService} from "../data/repos/mock-applicant-repo.service";
 import { ViewRoleComponent } from './view-role/view-role.component';
@@ -18,6 +18,7 @@ import {ToolbarModule} from "primeng/toolbar";
 import {ButtonModule} from "primeng/button";
 import { RoleApplicationsComponent } from './view-role/role-applications/role-applications.component';
 import {TagModule} from "primeng/tag";
+import {ApplicationsModule} from "../applications/applications.module";
 
 
 @NgModule({
@@ -36,11 +37,12 @@ import {TagModule} from "primeng/tag";
 		FormsModule,
 		ToolbarModule,
 		ButtonModule,
-		TagModule
+		TagModule,
+		ApplicationsModule
 	],
 	providers: [
 		{provide: RolesRepoService, useClass: MockRolesRepoService},
-		{provide: ApplicationsRepoService, useClass: MockApplicationsRepoServiceService},
+		{provide: ApplicationsRepoService, useClass: MockApplicationsRepoService},
 		{provide: ApplicantRepoService, useClass: MockApplicantRepoService}
 	]
 })

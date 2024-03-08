@@ -1,5 +1,5 @@
 <div>
-	<p-toolbar styleClass="mb-4">
+	<!--<p-toolbar styleClass="mb-4">
 		<div class="p-toolbar-group-start">
 			<ng-container *ngIf="selectedApplications.length > 0">
 				<button pButton icon="pi pi-calendar-plus" class="me-2" label="Schedule interview"></button>
@@ -9,7 +9,8 @@
 				Select one or more applications to enable bulk updates.
 			</ng-container>
 		</div>
-	</p-toolbar>
+	</p-toolbar>-->
+	<app-application-action-bar [bulkUpdateOnly]="true" [selectedApplications]="selectedApplications"></app-application-action-bar>
 	<h6>Submitted Applications</h6>
 	<p-table [value]="applications"
 			 [(selection)]="selectedApplications"
@@ -59,9 +60,9 @@
 				</td>
 				<td>{{application.applicant.fullName}}</td>
 				<td>{{application.applicationDate | date}}</td>
-				<td><p-tag [severity]="getSeverity(application.applicationStatus)">Waiting for review</p-tag></td>
+				<td><app-application-status-tag [status]="application.applicationStatus"></app-application-status-tag></td>
 				<td>
-					<a routerLink="applications/{{application.applicationId}}" class="p-button" size="small">Review</a>
+					<a routerLink="/applications/{{application.applicationId}}" class="p-button" size="small">Review</a>
 				</td>
 			</tr>
 		</ng-template>
