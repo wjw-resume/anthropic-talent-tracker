@@ -1,9 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap/dist/css/bootstrap.min.css' layer(bootstrap);
 
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+@import "primeicons/primeicons.css";
+
+// PRIMENG RESET
+
+@layer primeng, bootstrap;
+//@import "bootstrap/scss/bootstrap-reboot.scss" layer(bootstrap-reboot);
+
+
+// OTHER GLOBAL STYLES
 
 body {
 	background-color: #fafaf7;
 }
+
+@layer primeng {
+	.p-component {
+		line-height: 1.0;
+	}
+}
+
